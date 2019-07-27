@@ -20,12 +20,16 @@ export class HomePage {
     this.reorderIsEnabled = !this.reorderIsEnabled;
   }
 
-  itemReordered($event) {
+  itemReordered($event: any) {
     reorderArray(this.todos, $event);
   }
 
   gotoArchivePage() {
     this.navCtrl.push(ArchivedTodosPage);
+  }
+
+  archiveTodo(todoIndex: any) {
+    this.todoProvider.archiveTodo(todoIndex);
   }
 
   openTodoAlert() {
