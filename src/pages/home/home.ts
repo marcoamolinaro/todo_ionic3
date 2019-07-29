@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, reorderArray } from 'ionic-angular';
+import { NavController, AlertController, reorderArray, ToastController } from 'ionic-angular';
 
 import { TodoProvider } from '../../providers/todo/todo';
 import { ArchivedTodosPage } from '../../pages/archived-todos/archived-todos';
@@ -12,7 +12,7 @@ export class HomePage {
   public todos = [];
   reorderIsEnabled = false;
 
-  constructor(private todoProvider: TodoProvider, public navCtrl: NavController, public alertController: AlertController) {
+  constructor(private toastTodoCtrl: ToastController, private todoProvider: TodoProvider, public navCtrl: NavController, public alertController: AlertController) {
     this.todos = this.todoProvider.getTodos();
   }
 
@@ -52,6 +52,14 @@ export class HomePage {
             let todoText: any;
             todoText = inputData.addTodoInput;
             this.todoProvider.addTodo(todoText);
+
+            addTodoAlert.onDidDismiss(() => {
+              let addTodoToast = this.toastTodoCtrl.create({
+                message: "Added Todo",
+                duration: 2000
+              });
+              addTodoToast.present();
+            });
           }
         }
       ]
