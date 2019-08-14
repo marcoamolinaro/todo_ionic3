@@ -67,4 +67,41 @@ export class HomePage {
     addTodoAlert.present();
   }
 
+  editTodo(todoIndex) {
+    let editTodoAlert = this.alertController.create({
+      title: "Edit A Todo",
+      message: "Edit your todo",
+      inputs: [
+        {
+          type: "text",
+          name: "editTodoInput",
+          value: this.todos[todoIndex]
+        }
+      ],
+      buttons: [
+        {
+          text: "Cancel"
+        },
+        {
+          text: "Edit Todo",
+          handler: (inputData)=> {
+            let todoText: any;
+            todoText = inputData.editTodoInput;
+            this.todoProvider.editTodo(todoText, todoIndex);
+
+            editTodoAlert.onDidDismiss(() => {
+              let editTodoToast = this.toastTodoCtrl.create({
+                message: "Todo Edited",
+                duration: 2000
+              });
+              editTodoToast.present();
+            });
+          }
+        }
+      ]
+    });
+    editTodoAlert.present();
+  }
+
+
 }

@@ -28,6 +28,10 @@ export class TodoProvider {
     this.todos.push(todo);
   }
 
+  editTodo(todo: any, todoIndex: any) {
+    this.todos[todoIndex] = todo;
+  }
+
   archiveTodo(todoIndex: any) {
     let todoToBeArchived = this.todos[todoIndex];
     this.todos.splice(todoIndex, 1);
